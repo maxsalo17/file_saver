@@ -1,0 +1,31 @@
+name: file_saver
+description: >-
+  This package will help you save file with a single method on any platform
+  including macOS, iOS, Android, Windows, Web, Linux.
+version: 0.2.9
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  path_provider: ^2.0.11
+  http: ^0.13.0
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.incrediblezayed.file_saver
+        pluginClass: FileSaverPlugin
+      ios:
+        pluginClass: FileSaverPlugin
+      web:
+        pluginClass: FileSaverWeb
+        fileName: file_saver_web.dart
