@@ -26,6 +26,3 @@ flutter:
         pluginClass: FileSaverPlugin
       ios:
         pluginClass: FileSaverPlugin
-      web:
-        pluginClass: FileSaverWeb
-        fileName: file_saver_web.dart
