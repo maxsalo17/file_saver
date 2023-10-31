@@ -20,19 +20,7 @@ class PlatformHandlerAll extends PlatformHandler {
       'Something went wrong, please report the issue https://www.github.com/incrediblezayed/file_saver/issues';
   late String directory = _somethingWentWrong;
 
-  final String _issueLink =
-      'https://www.github.com/incrediblezayed/file_saver/issues';
-
-  Future<String> saveFileForAndroid(FileModel fileModel) async {
-    try {
-      directory =
-          await _channel.invokeMethod<String>(_saveFile, fileModel.toMap()) ??
-              '';
-    } catch (e) {
-      log('Error: $e');
-    }
-    return directory;
-  }
+  final String _issueLink = 'https://www.github.com/incrediblezayed/file_saver/issues';
 
   Future<String> saveFileForOtherPlatforms(FileModel fileModel) async {
     String path = '';
@@ -56,7 +44,7 @@ class PlatformHandlerAll extends PlatformHandler {
   @override
   Future<String?> saveFile(FileModel fileModel) async {
     if (Platform.isAndroid) {
-      return await saveFileForAndroid(fileModel);
+      throw UnsupportedError('Not supported');
     } else {
       return await saveFileForOtherPlatforms(fileModel);
     }
@@ -66,7 +54,7 @@ class PlatformHandlerAll extends PlatformHandler {
   @override
   Future<String?> saveAs(FileModel fileModel) async {
     String? path;
-    if (Platform.isAndroid || Platform.isIOS || Platform.isMacOS) {
+    if (Platform.isIOS || Platform.isMacOS) {
       path = await _channel.invokeMethod<String>(_saveAs, fileModel.toMap());
     } else if (Platform.isWindows) {
       final Int64List? bytes = await _channel.invokeMethod<Int64List?>('saveAs', fileModel.toMap());
